@@ -10,21 +10,23 @@ export default function CreateNote() {
     const router = useRouter();
 
     const create = async () => {
-        await fetch(`http://localhost:3000/api/notes`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                title,
-                content,
-            }),
-        });
+        if (title !== "" && content !== "") {
+            await fetch(`http://localhost:3000/api/notes`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    title,
+                    content,
+                }),
+            });
 
-        setContent("");
-        setTitle("");
+            setContent("");
+            setTitle("");
 
-        router.refresh();
+            router.refresh();
+        }
     };
 
     return (
